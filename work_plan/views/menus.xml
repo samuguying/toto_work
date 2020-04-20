@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="menu_plan_root" name="作业安排" sequence=""/>
+
+    <menuitem id="menu_molding_business_root" name="成型业务安排" sequence=""/>
+
+    <menuitem id="menu_work_plan" name="三班作业安排" sequence=""
+              parent="menu_plan_root"/>
+
+    <menuitem id="menu_work_plan_action" name="作业安排" sequence=""
+              parent="menu_work_plan"
+              action="toto_work_plan_action"/>
+
+    <menuitem id="menu_class_type_action" name="班别" sequence=""
+              parent="menu_work_plan"
+              action="toto_work_class_type_action"/>
+
+    <menuitem id="menu_work_device_action" name="设备" sequence=""
+              parent="menu_work_plan"
+              action="toto_work_device_action"/>
+</odoo>
