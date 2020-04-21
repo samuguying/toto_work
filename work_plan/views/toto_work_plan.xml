@@ -16,12 +16,12 @@
                     <field name="item_ids">
                         <tree>
                             <control>
-                                <create name="add_work_item_control" string="Add a Item"/>
-                                <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                <create name="add_work_item_control" string="添加人员安排"/>
+                                <create name="add_section_control" string="添加章节" context="{'default_display_type': 'line_section'}"/>
                             </control>
                             <field name="sequence" widget="handle"/>
                             <field name="display_type" invisible="1"/>
-                            <field name="name" string="Section" optional="show" widget="section_and_note_text"/>
+                            <field name="name" string="名称" optional="show" widget="section_and_note_text"/>
                             <field name="device_id"/>
                             <field name="user_id"/>
                             <field name="work_subject"/>
@@ -32,8 +32,8 @@
                         <form>
                             <field name="display_type" invisible="1"/>
                             <sheet>
+                                <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
                                 <group col="4">
-                                    <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
                                     <field name="device_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                     <field name="user_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                     <field name="work_subject" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
