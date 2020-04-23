@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="toto_power_plan_view_form" model="ir.ui.view">
+        <field name="name">toto.power.plan.view.form</field>
+        <field name="model">toto.power.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="name"/>
+            </form>
+        </field>
+
+    </record>
+
+
+    <record id="toto_power_plan_view_tree" model="ir.ui.view">
+        <field name="name">toto.power.plan.view.tree</field>
+        <field name="model">toto.power.plan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="toto_power_plan_action" model="ir.actions.act_window">
+        <field name="name">动力系</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">toto.power.plan</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
+        </field>
+    </record>
+</odoo>

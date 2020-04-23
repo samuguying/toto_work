@@ -7,8 +7,8 @@ class WorkPlan(models.Model):
 
     date = fields.Datetime('日期', default=fields.Datetime.now)
     class_id = fields.Many2one('toto.work.class.type', '班别')
-    work_type = fields.Selection([('night', '夜班'), ('day', '白班')])
-    vacation = fields.Char('Vacation', default='无')
+    work_type = fields.Selection([ ('day', '早班'),('middle', '中班'),('night', '夜班')],string="班次")
+    vacation = fields.Char('休假', default='无')
     staffing = fields.Integer('人员配置')
     item_ids = fields.One2many('toto.work.plan.item', 'plan_id', '人员安排')
 

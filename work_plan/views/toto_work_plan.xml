@@ -69,7 +69,7 @@
     </record>
 
     <record id="toto_work_plan_action" model="ir.actions.act_window">
-        <field name="name">作业安排</field>
+        <field name="name">作业内容</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">toto.work.plan</field>
         <field name="view_mode">tree,form</field>
