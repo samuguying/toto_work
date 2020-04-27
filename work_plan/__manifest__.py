@@ -19,6 +19,7 @@
         "views/toto_process_plan.xml",
         "views/toto_work_device.xml",
         "views/toto_work_plan.xml",
+        "views/assets.xml",
         "views/menus.xml",
     ],
     'demo': [],
