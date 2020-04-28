@@ -44,6 +44,11 @@
                             </sheet>
                         </form>
                     </field>
+                    <group string="不良对策">
+                        <field name="bad_content"/>
+                        <field name="user_ids" options="{'no_create':True}" widget="many2many_tags"/>
+                        <field name="detail_countermeasure"/>
+                    </group>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
@@ -69,7 +74,7 @@
     </record>
 
     <record id="toto_work_plan_action" model="ir.actions.act_window">
-        <field name="name">作业安排</field>
+        <field name="name">作业内容</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">toto.work.plan</field>
         <field name="view_mode">tree,form</field>
