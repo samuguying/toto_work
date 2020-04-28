@@ -12,40 +12,45 @@
                         <field name="vacation"/>
                         <field name="staffing"/>
                     </group>
+                    <group string="人员安排">
+                        <field name="item_ids" no_lable="True">
+                            <tree>
+                                <control>
+                                    <create name="add_dissovle_item_control" string="添加人员安排"/>
 
-                    <tree>
-                        <control>
-                            <create name="add_dissovle_item_control" string="添加人员安排"/>
-
-                        </control>
+                                </control>
 
 
-                        <field name="name" string="名称" optional="show" widget="section_and_note_text"/>
-                        <field name="device_id"/>
-                        <field name="user_id"/>
-                        <field name="dissolve_pinben"/>
-                        <field name="predetermined_quantity"/>
-                        <field name="actual_quantity"/>
-                        <field name="note"/>
-                    </tree>
-                    <form>
-                        <field name="display_type" invisible="1"/>
-                        <sheet>
-                            <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
-                            <group col="4">
-                                <field name="device_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
-                                <field name="user_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
-                                <field name="dissolve_pinben"
-                                       attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
-                                <field name="predetermined_quantity"
-                                       attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
-                                <field name="actual_quantity"
-                                       attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
-                                <field name="note" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
-                            </group>
-                        </sheet>
-                    </form>
-
+                                <field name="name" string="名称" optional="show" widget="section_and_note_text"/>
+                                <field name="device_id"/>
+                                <field name="user_id"/>
+                                <field name="dissolve_pinben"/>
+                                <field name="predetermined_quantity"/>
+                                <field name="actual_quantity"/>
+                                <field name="note"/>
+                            </tree>
+                            <form>
+                                <field name="display_type" invisible="1"/>
+                                <sheet>
+                                    <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
+                                    <group col="4">
+                                        <field name="device_id"
+                                               attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                        <field name="user_id"
+                                               attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                        <field name="dissolve_pinben"
+                                               attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                        <field name="predetermined_quantity"
+                                               attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                        <field name="actual_quantity"
+                                               attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                        <field name="note"
+                                               attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </group>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
