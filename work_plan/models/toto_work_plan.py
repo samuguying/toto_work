@@ -34,8 +34,21 @@ class WorkPlanItem(models.Model):
     predetermined_quantity = fields.Integer('预定数量')
     actual_quantity = fields.Integer('实际数量')
     note = fields.Text('备注')
+    state = fields.Selection([
+        ('progress', '进行中'),
+        ('done', '完成'),
+        ('cancel', '终止'),
+    ], string='状态', copy=False, default='progress', readonly=True, required=True)
 
     display_type = fields.Selection([
         ('line_section', "Section"),
         ('line_note', "Note")], default=False, help="Technical field for UX purpose.")
     name = fields.Char(string="名称")
+
+    def action_finish(self):
+        self.ensure_one()
+        self.state = 'done'
+
+    def action_cancel(self):
+        self.ensure_one()
+        self.state = 'cancel'

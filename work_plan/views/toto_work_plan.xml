@@ -29,6 +29,9 @@
                             <field name="predetermined_quantity"/>
                             <field name="actual_quantity"/>
                             <field name="note"/>
+                            <field name="state"/>
+                            <button name="action_finish" type="object" string="完成" class="oe_highlight" states="progress"/>
+                            <button name="action_cancel" type="object" string="终止" class="oe_highlight" states="progress,done"/>
                         </tree>
                         <form>
                             <field name="display_type" invisible="1"/>
