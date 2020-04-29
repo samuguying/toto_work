@@ -10,6 +10,9 @@ class WorkPlan(models.Model):
     work_type = fields.Selection([ ('day', '早班'),('middle', '中班'),('night', '夜班')],string="班次")
     vacation = fields.Char('休假', default='无')
     staffing = fields.Integer('人员配置')
+    bad_content = fields.Text('不良内容')
+    user_ids = fields.Many2many('res.users', string='作业员', ondelete="restrict")
+    detail_countermeasure = fields.Html('具体对策')
     item_ids = fields.One2many('toto.work.plan.item', 'plan_id', '人员安排')
 
 
