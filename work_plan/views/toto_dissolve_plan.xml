@@ -12,19 +12,13 @@
                         <field name="vacation"/>
                         <field name="staffing"/>
                     </group>
-                    <group string="人员安排">
-                        <field name="item_ids" no_lable="True">
+                    <div class="o_horizontal_separator">人员安排</div>
+                    <field name="item_ids" no_lable="True">
                             <tree>
-                                <control>
-                                    <create name="add_dissovle_item_control" string="添加人员安排"/>
-
-                                </control>
-
-
-                                <field name="name" string="名称" optional="show" widget="section_and_note_text"/>
+                                <field name="name" string="名称" optional="show"/>
                                 <field name="device_id"/>
                                 <field name="user_id"/>
-                                <field name="dissolve_pinben"/>
+                                <field name="product_id"/>
                                 <field name="predetermined_quantity"/>
                                 <field name="actual_quantity"/>
                                 <field name="note"/>
@@ -38,7 +32,7 @@
                                                attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                         <field name="user_id"
                                                attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
-                                        <field name="dissolve_pinben"
+                                        <field name="product_id"
                                                attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                         <field name="predetermined_quantity"
                                                attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
@@ -50,7 +44,6 @@
                                 </sheet>
                             </form>
                         </field>
-                    </group>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
@@ -66,13 +59,10 @@
         <field name="model">toto.dissolve.plan</field>
         <field name="arch" type="xml">
             <tree>
-
                 <field name="date" widget="date"/>
                 <field name="line_id"/>
-
                 <field name="vacation"/>
                 <field name="staffing"/>
-
             </tree>
         </field>
     </record>

@@ -5,6 +5,7 @@
         <field name="model">toto.work.plan</field>
         <field name="arch" type="xml">
             <form>
+                <field name="plan_type" invisible="1"/>
                 <sheet>
                     <group>
                         <field name="date" widget="date"/>
@@ -48,7 +49,7 @@
                             </sheet>
                         </form>
                     </field>
-                    <group string="不良对策">
+                    <group string="不良对策" attrs="{'invisible':[('plan_type', '=', 'power')]}">
                         <field name="bad_content"/>
                         <field name="user_ids" options="{'no_create':True}" widget="many2many_tags"/>
                         <field name="detail_countermeasure"/>
@@ -77,47 +78,14 @@
         </field>
     </record>
 
-    <record id="toto_work_plan_view_calendar" model="ir.ui.view">
-        <field name="name">toto.work.plan.view.tree</field>
-        <field name="model">toto.work.plan</field>
-        <field name="arch" type="xml">
-            <calendar string="日历" date_start="date" event_open_popup="true" mode="month"
-                      date_stop="date" quick_add="false">
-                <field name="item_ids" widget="many2many_tags"/>
-            </calendar>
-        </field>
-    </record>
-
     <record id="toto_shaping_plan_action" model="ir.actions.act_window">
         <field name="name">成形系作业内容</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">toto.work.plan</field>
         <field name="context">{'default_plan_type':'shaping'}</field>
-        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_mode">tree,form</field>
         <field name="domain">[('plan_type', '=', 'shaping')]</field>
         <field name="view_ids" eval="[(5, 0, 0),
-            (0, 0, {'view_mode': 'calendar', 'view_id': ref('toto_work_plan_view_calendar')}),
-            (0, 0, {'view_mode': 'tree', 'view_id': ref('toto_work_plan_view_tree')}),
-            (0, 0, {'view_mode': 'form', 'view_id': ref('toto_work_plan_view_form')})]"/>
-        <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-                <!-- Add Text Here -->
-            </p>
-            <p>
-                <!-- More details about what a user can do with this object will be OK -->
-            </p>
-        </field>
-    </record>
-
-    <record id="toto_power_plan_action" model="ir.actions.act_window">
-        <field name="name">动力系作业内容</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">toto.work.plan</field>
-        <field name="context">{'default_plan_type':'power'}</field>
-        <field name="view_mode">tree,form,calendar</field>
-        <field name="domain">[('plan_type', '=', 'power')]</field>
-        <field name="view_ids" eval="[(5, 0, 0),
-            (0, 0, {'view_mode': 'calendar', 'view_id': ref('toto_work_plan_view_calendar')}),
             (0, 0, {'view_mode': 'tree', 'view_id': ref('toto_work_plan_view_tree')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('toto_work_plan_view_form')})]"/>
         <field name="help" type="html">
