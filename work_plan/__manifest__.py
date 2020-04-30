@@ -13,6 +13,7 @@
         "security/groups.xml",
         "security/ir.model.access.csv",
         "views/toto_class_type.xml",
+        "views/toto_work_product.xml",
         "views/toto_power_plan.xml",
         "views/toto_dissolve_plan.xml",
         "views/toto_dissolve_device.xml",

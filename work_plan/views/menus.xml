@@ -47,4 +47,8 @@
     <menuitem id="menu_work_device_action" name="设备" sequence=""
               parent="menu_plan_config"
               action="toto_work_device_action"/>
+
+    <menuitem id="menu_work_product_action" name="品番" sequence=""
+              parent="menu_plan_config"
+              action="toto_work_plan_product_action"/>
 </odoo>
