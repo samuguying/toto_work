@@ -5,10 +5,11 @@
         <field name="model">toto.work.plan</field>
         <field name="arch" type="xml">
             <form>
+                <field name="plan_type" invisible="1"/>
                 <sheet>
                     <group>
                         <field name="date" widget="date"/>
-                        <field name="class_id"/>
+                        <field name="class_type_id" options="{'no_create':True}"/>
                         <field name="work_type"/>
                         <field name="vacation"/>
                         <field name="staffing"/>
@@ -24,22 +25,20 @@
                             <field name="display_type" invisible="1"/>
                             <field name="name" string="名称" optional="show" widget="section_and_note_text"/>
                             <field name="device_id"/>
-                            <field name="user_id"/>
+                            <field name="employee_id"/>
                             <field name="work_subject"/>
                             <field name="predetermined_quantity"/>
                             <field name="actual_quantity"/>
                             <field name="note"/>
-                            <field name="state"/>
-                            <button name="action_finish" type="object" string="完成" class="oe_highlight" states="progress"/>
-                            <button name="action_cancel" type="object" string="终止" class="oe_highlight" states="progress,done"/>
                         </tree>
                         <form>
                             <field name="display_type" invisible="1"/>
                             <sheet>
                                 <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
                                 <group col="4">
-                                    <field name="device_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
-                                    <field name="user_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                    <field name="device_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
+                                    <field name="employee_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}"
+                                           options="{'no_create':True}" domain="[('department_id', '=', parent.class_type_id)]"/>
                                     <field name="work_subject" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                     <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                     <field name="actual_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
@@ -48,9 +47,9 @@
                             </sheet>
                         </form>
                     </field>
-                    <group string="不良对策">
+                    <group string="不良对策" attrs="{'invisible':[('plan_type', '=', 'power')]}">
                         <field name="bad_content"/>
-                        <field name="user_ids" options="{'no_create':True}" widget="many2many_tags"/>
+                        <field name="employee_ids" options="{'no_create':True}" widget="many2many_tags"/>
                         <field name="detail_countermeasure"/>
                     </group>
                 </sheet>
@@ -69,22 +68,11 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="date" widget="date"/>
-                <field name="class_id"/>
+                <field name="class_type_id"/>
                 <field name="work_type"/>
                 <field name="vacation"/>
                 <field name="staffing"/>
             </tree>
-        </field>
-    </record>
-
-    <record id="toto_work_plan_view_calendar" model="ir.ui.view">
-        <field name="name">toto.work.plan.view.tree</field>
-        <field name="model">toto.work.plan</field>
-        <field name="arch" type="xml">
-            <calendar string="日历" date_start="date" event_open_popup="true" mode="month"
-                      date_stop="date" quick_add="false">
-                <field name="item_ids" widget="many2many_tags"/>
-            </calendar>
         </field>
     </record>
 
@@ -93,31 +81,9 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">toto.work.plan</field>
         <field name="context">{'default_plan_type':'shaping'}</field>
-        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_mode">tree,form</field>
         <field name="domain">[('plan_type', '=', 'shaping')]</field>
         <field name="view_ids" eval="[(5, 0, 0),
-            (0, 0, {'view_mode': 'calendar', 'view_id': ref('toto_work_plan_view_calendar')}),
-            (0, 0, {'view_mode': 'tree', 'view_id': ref('toto_work_plan_view_tree')}),
-            (0, 0, {'view_mode': 'form', 'view_id': ref('toto_work_plan_view_form')})]"/>
-        <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-                <!-- Add Text Here -->
-            </p>
-            <p>
-                <!-- More details about what a user can do with this object will be OK -->
-            </p>
-        </field>
-    </record>
-
-    <record id="toto_power_plan_action" model="ir.actions.act_window">
-        <field name="name">动力系作业内容</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">toto.work.plan</field>
-        <field name="context">{'default_plan_type':'power'}</field>
-        <field name="view_mode">tree,form,calendar</field>
-        <field name="domain">[('plan_type', '=', 'power')]</field>
-        <field name="view_ids" eval="[(5, 0, 0),
-            (0, 0, {'view_mode': 'calendar', 'view_id': ref('toto_work_plan_view_calendar')}),
             (0, 0, {'view_mode': 'tree', 'view_id': ref('toto_work_plan_view_tree')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('toto_work_plan_view_form')})]"/>
         <field name="help" type="html">
