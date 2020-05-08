@@ -17,7 +17,7 @@
                             <tree>
                                 <field name="name" string="名称" optional="show"/>
                                 <field name="device_id"/>
-                                <field name="user_id"/>
+                                <field name="employee_id"/>
                                 <field name="product_id"/>
                                 <field name="predetermined_quantity"/>
                                 <field name="actual_quantity"/>
@@ -30,7 +30,7 @@
                                     <group col="4">
                                         <field name="device_id"
                                                attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
-                                        <field name="user_id"
+                                        <field name="employee_id"
                                                attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                         <field name="product_id"
                                                attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
