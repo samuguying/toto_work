@@ -13,11 +13,7 @@ class WorkPlan(models.Model):
     work_type = fields.Selection([('day', '早班'), ('middle', '中班'), ('night', '夜班')], string="班次")
     vacation = fields.Char('休假', default='无')
     staffing = fields.Integer('出勤人数')
-    bad_content = fields.Text('不良内容')
-    employee_ids = fields.Many2many('hr.employee', string='作业员', ondelete="restrict",
-                                    domain="[('department_id', '=', class_type_id)]")
-    detail_countermeasure = fields.Html('具体对策')
-    item_ids = fields.One2many('toto.work.plan.item', 'plan_id', '人员安排', ondelete="cascade")
+
     plan_type = fields.Selection([
         ('shaping', '成形系'),
         ('power', '动力系'),
@@ -38,21 +34,7 @@ class WorkPlanItem(models.Model):
     predetermined_quantity = fields.Integer('预定数量', default=None)
     actual_quantity = fields.Integer('实际数量', default=None)
     note = fields.Text('备注')
-    state = fields.Selection([
-        ('progress', '进行中'),
-        ('done', '完成'),
-        ('cancel', '终止'),
-    ], string='状态', copy=False, default='progress', readonly=True, required=True)
-
     display_type = fields.Selection([
         ('line_section', "Section"),
         ('line_note', "Note")], default=False, help="Technical field for UX purpose.")
     name = fields.Char(string="名称")
-
-    def action_finish(self):
-        self.ensure_one()
-        self.state = 'done'
-
-    def action_cancel(self):
-        self.ensure_one()
-        self.state = 'cancel'

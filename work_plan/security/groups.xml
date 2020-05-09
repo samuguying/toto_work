@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="toto_work_category" model="ir.module.category">
-        <field name="name">成形业务管理</field>
+        <field name="name">业务管理</field>
         <field name="sequence" eval="1"/>
     </record>
     <record id="group_work_plan_user" model="res.groups">
@@ -9,14 +9,30 @@
         <field name="category_id" ref="toto_work_category"/>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
     </record>
-    <record id="group_work_plan_monitor" model="res.groups">
-        <field name="name">班长</field>
+    <record id="group_work_shaping_monitor" model="res.groups">
+        <field name="name">成形系班长</field>
         <field name="category_id" ref="toto_work_category"/>
-        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="implied_ids" eval="[(4, ref('group_work_plan_user'))]"/>
+    </record>
+    <record id="group_work_power_monitor" model="res.groups">
+        <field name="name">动力系班长</field>
+        <field name="category_id" ref="toto_work_category"/>
+        <field name="implied_ids" eval="[(4, ref('group_work_plan_user'))]"/>
+    </record>
+    <record id="group_work_process_monitor" model="res.groups">
+        <field name="name">加工系班长</field>
+        <field name="category_id" ref="toto_work_category"/>
+        <field name="implied_ids" eval="[(4, ref('group_work_plan_user'))]"/>
+    </record>
+    <record id="group_work_dissolve_monitor" model="res.groups">
+        <field name="name">溶着系班长</field>
+        <field name="category_id" ref="toto_work_category"/>
+        <field name="implied_ids" eval="[(4, ref('group_work_plan_user'))]"/>
     </record>
     <record id="group_work_plan_manager" model="res.groups">
         <field name="name">管理员</field>
         <field name="category_id" ref="toto_work_category"/>
-        <field name="implied_ids" eval="[(4, ref('group_work_plan_user'))]"/>
+        <field name="implied_ids"
+               eval="[(4, ref('group_work_plan_user')),(4, ref('group_work_shaping_monitor')),(4, ref('group_work_power_monitor')),(4, ref('group_work_process_monitor')),(4, ref('group_work_dissolve_monitor'))]"/>
     </record>
 </odoo>
