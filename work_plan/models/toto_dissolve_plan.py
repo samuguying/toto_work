@@ -1,30 +1,17 @@
 from odoo import models, fields, api
 
 
-class DissolvePlan(models.Model):
-    _inherit = ["mail.thread", 'mail.activity.mixin']
+class WorkPlanDissolve(models.Model):
+    _inherit = 'toto.work.plan'
     _name = 'toto.dissolve.plan'
 
-    date = fields.Datetime('日期', default=fields.Datetime.now)
-    line_id = fields.Char('线别')
-    staffing = fields.Integer('人员配置')
-    vacation = fields.Char('休假', default='无')
-    item_ids = fields.One2many('toto.dissolve.plan.item', 'plan_id', '人员安排')
+    line_id = fields.Many2one('toto.work.line', '线别')
+    item_ids = fields.One2many('toto.dissolve.plan.item', 'dissolve_plan_id', string='人员安排', ondelete="cascade")
 
 
-class DissolvePlanItem(models.Model):
+class WorkPlanDissolveItem(models.Model):
+    _inherit = 'toto.work.plan.item'
     _name = 'toto.dissolve.plan.item'
 
-    sequence = fields.Integer(string="Sequence", default=10)
-    plan_id = fields.Many2one('toto.dissolve.plan', '计划')
-    user_id = fields.Many2one('res.users', '作业员', ondelete="restrict")
-    device_id = fields.Many2one('toto.dissolve.device', '设备')
-    dissolve_pinben = fields.Char('品番')
-    predetermined_quantity = fields.Integer('预定数量')
-    actual_quantity = fields.Integer('实际数量')
-    note = fields.Text('备注')
-
-    display_type = fields.Selection([
-        ('line_section', "Section"),
-        ('line_note', "Note")], default=False, help="Technical field for UX purpose.")
-    name = fields.Char(string="名称")
+    product_id = fields.Many2one('toto.work.plan.product', '作业内容(品番)', ondelete="restrict")
+    dissolve_plan_id = fields.Many2one('toto.dissolve.plan', '溶着系计划')

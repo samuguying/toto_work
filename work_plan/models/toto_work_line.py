@@ -1,10 +1,10 @@
 from odoo import models, fields, api
 
 
-class DissolveDevice(models.Model):
-    _name = 'toto.dissolve.device'
+class WorkLine(models.Model):
+    _name = 'toto.work.line'
 
-    name = fields.Char('设备名称', required=True)
+    name = fields.Char('线别名称', required=True)
 
     _sql_constraints = [
         ("name_uniq", "unique (name)", "名称不能重复！"),
