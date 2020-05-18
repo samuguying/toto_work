@@ -41,10 +41,10 @@
               parent="menu_plan_root"
               groups="group_work_dissolve_monitor,group_work_process_monitor,group_work_power_monitor,group_work_shaping_monitor"/>
 
-    <menuitem id="menu_line_type_action" name="线别" sequence=""
-              parent="menu_plan_config"
-              action="toto_work_line_action"
-              groups="group_work_dissolve_monitor"/>
+<!--    <menuitem id="menu_line_type_action" name="线别" sequence=""-->
+<!--              parent="menu_plan_config"-->
+<!--              action="toto_work_line_action"-->
+<!--              groups="group_work_dissolve_monitor"/>-->
 
     <menuitem id="menu_toto_work_device_action" name="设备" sequence=""
               parent="menu_plan_config"
