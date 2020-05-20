@@ -16,6 +16,7 @@
                     </group>
                     <div class="o_horizontal_separator">人员安排</div>
                     <field name="item_ids">
+                        <field name="device_type" invisible="1"/>
                         <tree>
                             <control>
                                 <create name="add_work_item_control" string="添加人员安排"/>
@@ -27,21 +28,21 @@
                             <field name="device_id"/>
                             <field name="employee_id"/>
                             <field name="work_subject"/>
-                            <field name="predetermined_quantity"/>
+                            <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                             <field name="actual_quantity"/>
                             <field name="note"/>
                         </tree>
                         <form>
                             <field name="display_type" invisible="1"/>
                             <sheet>
-                                <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
-                                <group col="4">
-                                    <field name="device_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
-                                    <field name="employee_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}"
-                                           options="{'no_create':True}" domain="[('department_id', '=', parent.class_type_id)]"/>
-                                    <field name="work_subject" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                <group>
+                                    <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
+                                    <field name="device_id" domain="[('device_type', '=', 'shaping')]"
+                                           attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
+                                    <field name="employee_id" options="{'no_create':True}" domain="[('department_id', '=', parent.class_type_id)]"/>
+                                    <field name="work_subject"/>
                                     <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
-                                    <field name="actual_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                    <field name="actual_quantity"/>
                                     <field name="note" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                 </group>
                             </sheet>
