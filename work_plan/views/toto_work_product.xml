@@ -4,7 +4,7 @@
         <field name="name">toto.work.plan.product.view.tree</field>
         <field name="model">toto.work.plan.product</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree editable="bottom">
                 <field name="name"/>
                 <field name="code"/>
             </tree>
