@@ -20,7 +20,6 @@ class WorkPlanDissolve(models.Model):
         ('finished', '完成'),
     ], default='process', string='达成情况')
 
-    @api.multi
     def name_get(self):
         return [(dissolve.id, "%s-%s" % (dissolve.device_id.name, datetime.strftime(dissolve.date, "%Y年%m月%d日"))) for dissolve in self]
 
