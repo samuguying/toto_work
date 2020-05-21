@@ -71,8 +71,9 @@
                 <field name="date" widget="date"/>
                 <field name="class_type_id"/>
                 <field name="work_type"/>
-                <field name="vacation"/>
                 <field name="staffing"/>
+                <field name="vacation"/>
+                <field name ="bad_content"/>
             </tree>
         </field>
     </record>
