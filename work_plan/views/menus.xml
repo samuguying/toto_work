@@ -6,45 +6,28 @@
 
 <!--    成形系-->
     <menuitem id="menu_shaping_plan" name="成形系" sequence="10"
-              parent="menu_plan_root" groups="group_work_shaping_monitor"/>
-
-    <menuitem id="menu_shaping_plan_action" name="作业内容" sequence=""
-              parent="menu_shaping_plan"
-              action="toto_shaping_plan_action"/>
+              parent="menu_plan_root" action="toto_shaping_plan_action"
+              groups="group_work_shaping_monitor"/>
 
 <!--    动力系-->
     <menuitem id="menu_power_plan" name="动力系" sequence="20"
-              parent="menu_plan_root" groups="group_work_power_monitor"/>
-
-    <menuitem id="menu_power_plan_action" name="作业内容" sequence=""
-              parent="menu_power_plan"
-              action="toto_power_plan_action"/>
+              parent="menu_plan_root" action="toto_power_plan_action"
+              groups="group_work_power_monitor"/>
 
 <!--    加工系-->
     <menuitem id="menu_process_plan" name="加工系" sequence="30"
-              parent="menu_plan_root" groups="group_work_process_monitor"/>
-
-    <menuitem id="menu_process_plan_action" name="作业内容" sequence=""
-              parent="menu_process_plan"
-              action="toto_process_plan_action"/>
+              parent="menu_plan_root" action="toto_process_plan_action"
+              groups="group_work_process_monitor"/>
 
 <!--    溶着系-->
     <menuitem id="menu_dissolve_plan" name="溶着系" sequence="40"
-              parent="menu_plan_root" groups="group_work_dissolve_monitor"/>
-
-    <menuitem id="menu_dissolve_plan_action" name="作业内容" sequence=""
-              parent="menu_dissolve_plan"
-              action="toto_dissolve_plan_action"/>
+              parent="menu_plan_root" action="toto_dissolve_plan_action"
+              groups="group_work_dissolve_monitor"/>
 
     <!--    配置班别、设备-->
     <menuitem id="menu_plan_config" name="配置" sequence="50"
               parent="menu_plan_root"
               groups="group_work_dissolve_monitor,group_work_process_monitor,group_work_power_monitor,group_work_shaping_monitor"/>
-
-<!--    <menuitem id="menu_line_type_action" name="线别" sequence=""-->
-<!--              parent="menu_plan_config"-->
-<!--              action="toto_work_line_action"-->
-<!--              groups="group_work_dissolve_monitor"/>-->
 
     <menuitem id="menu_toto_work_device_action" name="设备" sequence=""
               parent="menu_plan_config"
