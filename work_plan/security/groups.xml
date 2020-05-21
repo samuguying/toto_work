@@ -33,6 +33,6 @@
         <field name="name">管理员</field>
         <field name="category_id" ref="toto_work_category"/>
         <field name="implied_ids"
-               eval="[(4, ref('group_work_plan_user')),(4, ref('group_work_shaping_monitor')),(4, ref('group_work_power_monitor')),(4, ref('group_work_process_monitor')),(4, ref('group_work_dissolve_monitor'))]"/>
+               eval="[(4, ref('group_work_shaping_monitor')),(4, ref('group_work_power_monitor')),(4, ref('group_work_process_monitor')),(4, ref('group_work_dissolve_monitor'))]"/>
     </record>
 </odoo>

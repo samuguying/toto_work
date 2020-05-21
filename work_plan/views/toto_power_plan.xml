@@ -41,24 +41,26 @@
                             <field name="device_id"/>
                             <field name="employee_id"/>
                             <field name="work_subject"/>
-                            <field name="predetermined_quantity"/>
+                            <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                             <field name="actual_quantity"/>
-                            <field name="note"/>
-                            <field name="state"/>
-                            <button name="action_finish" type="object" icon="fa-check" states="progress"/>
-                            <button name="action_cancel" type="object" icon="fa-times" states="progress,done"/>
+                            <field name="note" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                            <field name="state" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                            <button name="action_finish" type="object" icon="fa-check"
+                                    attrs="{'invisible':['|',('display_type', '=', 'line_section'),('state', 'in', ['done','cancel'])]}"/>
+                            <button name="action_cancel" type="object" icon="fa-times"
+                                    attrs="{'invisible':['|',('display_type', '=', 'line_section'),('state', '=', 'cancel')]}"/>
                         </tree>
                         <form>
                             <field name="display_type" invisible="1"/>
                             <sheet>
-                                <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
-                                <group col="4">
-                                    <field name="device_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
-                                    <field name="employee_id" attrs="{'invisible':[('display_type', '=', 'line_section')]}"
-                                           options="{'no_create':True}" domain="[('department_id', '=', parent.class_type_id)]"/>
-                                    <field name="work_subject" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                <group>
+                                    <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
+                                    <field name="device_id" domain="[('device_type', '=', 'power')]"
+                                           attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
+                                    <field name="employee_id" options="{'no_create':True}" domain="[('department_id', '=', parent.class_type_id)]"/>
+                                    <field name="work_subject"/>
                                     <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
-                                    <field name="actual_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                    <field name="actual_quantity"/>
                                     <field name="note" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                 </group>
                             </sheet>
