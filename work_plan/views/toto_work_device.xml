@@ -30,7 +30,7 @@
         <field name="name">toto.work.device.view.tree.inherit</field>
         <field name="model">toto.work.device</field>
         <field name="inherit_id" ref="toto_work_device_view_tree"/>
-        <field name="groups" eval="[(4, ref('work_plan.group_work_plan_manager'))]"/>
+        <field name="groups_id" eval="[(4, ref('work_plan.group_work_plan_manager'))]"/>
         <field name="arch" type="xml">
             <field name="device_type" position="attributes">
                 <attribute name="readonly">False</attribute>
@@ -42,7 +42,7 @@
         <field name="name">toto.work.device.view.form</field>
         <field name="model">toto.work.device</field>
         <field name="inherit_id" ref="toto_work_device_view_form"/>
-        <field name="groups" eval="[(4, ref('work_plan.group_work_plan_manager'))]"/>
+        <field name="groups_id" eval="[(4, ref('work_plan.group_work_plan_manager'))]"/>
         <field name="arch" type="xml">
             <field name="device_type" position="attributes">
                 <attribute name="readonly">False</attribute>
