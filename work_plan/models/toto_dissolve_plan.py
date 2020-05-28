@@ -18,6 +18,18 @@ class WorkPlanDissolve(models.Model):
     class_type_id = fields.Many2one('hr.department', related="assume_employee_id.department_id")
     item_ids = fields.One2many("toto.dissolve.plan.item", "dissolve_plan_id")
     note = fields.Text('备注')
+    state = fields.Selection([
+        ('progress', '进行中'),
+        ('done', '完成'),
+    ], string='状态', compute="_compute_state", store=True)
+
+    @api.depends("item_ids", "item_ids.state")
+    def _compute_state(self):
+        for dissolve in self:
+            if all([item.state == 'done' for item in dissolve.item_ids]):
+                dissolve.state = "done"
+            else:
+                dissolve.state = "progress"
 
 
 class WorkPlanDissolveItem(models.Model):
@@ -33,7 +45,6 @@ class WorkPlanDissolveItem(models.Model):
     state = fields.Selection([
         ('progress', '进行中'),
         ('done', '完成'),
-        ('cancel', '终止'),
     ], string='状态', copy=False, default='progress', readonly=True, required=True)
 
     @api.depends("staff_ids")
@@ -47,10 +58,6 @@ class WorkPlanDissolveItem(models.Model):
     def action_finish(self):
         self.ensure_one()
         self.state = 'done'
-
-    def action_cancel(self):
-        self.ensure_one()
-        self.state = 'cancel'
 
 
 class HrEmployeeInherit(models.Model):
