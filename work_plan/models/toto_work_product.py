@@ -5,8 +5,9 @@ class Product(models.Model):
     _name = 'toto.work.plan.product'
     _rec_name = 'code'
 
+    code = fields.Char('品番', required=True)
     name = fields.Char('名称')
-    code = fields.Char('品番')
 
-    def name_get(self):
-        return [(p.id, p.code) for p in self]
+    _sql_constraints = [
+        ("code_uniq", "unique (code)", "品番不能重复！"),
+    ]

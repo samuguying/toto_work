@@ -90,7 +90,7 @@
         <field name="name">动力系作业内容</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">toto.power.plan</field>
-        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 <!-- Add Text Here -->

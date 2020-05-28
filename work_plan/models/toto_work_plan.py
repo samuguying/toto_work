@@ -9,6 +9,7 @@ class WorkPlan(models.Model):
     date = fields.Datetime('日期', default=fields.Datetime.now)
     # class_id = fields.Many2one('toto.work.class.type', '班别', ondelete="restrict")
     class_type_id = fields.Many2one('hr.department', '班别', ondelete="restrict",
+                                    default=lambda self: self.env.user.employee_ids.mapped('department_id'),
                                     domain=lambda self: [('id', 'in', self.env.user.employee_ids.mapped('department_id').ids)])
     work_type = fields.Selection([('day', '早班'), ('middle', '中班'), ('night', '夜班')], string="班次")
     vacation = fields.Char('休假', default='无')

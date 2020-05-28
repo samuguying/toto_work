@@ -30,3 +30,8 @@ class WorkPlanDissolve(models.Model):
     def action_renew(self):
         self.ensure_one()
         self.state = 'process'
+
+
+class WorkPlanDissolveItem(models.Model):
+    _inherit = 'toto.work.plan.item'
+    _name = 'toto.dissolve.plan.item'
