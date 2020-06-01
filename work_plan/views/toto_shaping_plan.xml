@@ -24,13 +24,14 @@
                             </control>
                             <field name="sequence" widget="handle"/>
                             <field name="display_type" invisible="1"/>
-                            <field name="name" string="名称" optional="show" widget="section_and_note_text"/>
-                            <field name="device_id"/>
-                            <field name="employee_id"/>
+                            <field name="name" string="名称" optional="show" widget="section_and_note_text" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
+                            <field name="device_id" domain="[('device_type', '=', 'shaping')]"
+                                           attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
+                            <field name="employee_id" options="{'no_create':True}" domain="[('department_id', '=', parent.class_type_id)]"/>
                             <field name="work_subject"/>
                             <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                             <field name="actual_quantity"/>
-                            <field name="note"/>
+                            <field name="note" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                         </tree>
                         <form>
                             <field name="display_type" invisible="1"/>
