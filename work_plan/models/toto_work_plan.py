@@ -18,6 +18,7 @@ class WorkPlan(models.Model):
     class_type_id = fields.Many2one('hr.department', '班别', ondelete="restrict",
                                     default=_default_class_type_id,
                                     domain=lambda self: [('id', 'in', self.env.user.employee_ids.mapped('department_id').ids)])
+    users_id = fields.One2many("res.users", compute="_compute_users")
     work_type = fields.Selection([('day', '早班'), ('middle', '中班'), ('night', '夜班')], string="班次")
     vacation = fields.Char('休假', default='无')
     staffing = fields.Integer('出勤人数')
@@ -28,6 +29,13 @@ class WorkPlan(models.Model):
         ('dissolve', '溶着系'),
         ('process', '加工系'),
     ])
+
+    @api.depends("class_type_id")
+    def _compute_users(self):
+        for p in self:
+            p.users_id = [(4, u.id) for u in p.class_type_id.mapped("member_ids.user_id")]
+            for dept in p.class_type_id.child_ids:
+                p.users_id = [(4, u.id) for u in dept.member_ids.mapped("user_id")]
 
 
 class WorkPlanItem(models.Model):
