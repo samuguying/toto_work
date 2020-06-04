@@ -6,10 +6,11 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="date" widget="date"/>
-                <field name="class_type_id"/>
-                <field name="work_type"/>
-                <field name="vacation"/>
-                <field name="staffing"/>
+                <field name="project"/>
+                <field name="content"/>
+                <field name="user_id"/>
+                <field name="note"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -20,26 +21,52 @@
         <field name="arch" type="xml">
             <form>
                 <field name="plan_type" invisible="1"/>
+                <header>
+                    <button name="action_start" type="object" string="开始" states="draft"/>
+                    <button name="action_done" type="object" string="完成" states="process"/>
+                    <button name="action_cancel" type="object" string="结束" states="process,done"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
                 <sheet>
-                    <group>
-                        <field name="date" widget="date"/>
+                    <field name="users_id" widget="many2many_tags" invisible="1"/>
+                    <div class="oe_title">
+                        <label for="project" class="oe_edit_only"/>
+                        <h1>
+                            <field name="project" placeholder="作业项目" required="True"/>
+                        </h1>
+                    </div>
+                    <group col="4">
+                        <field name="create_user_id" options="{'no_create':True}"/>
                         <field name="class_type_id" options="{'no_create':True}"/>
-                        <field name="work_type"/>
-                        <field name="vacation"/>
-                        <field name="staffing"/>
+                        <field name="content"/>
+                        <field name="user_id" options="{'no_create':True}"/>
+                        <field name="date" widget="date"/>
+                        <field name="plan_time"/>
+                        <field name="finish_time"/>
+                        <label for="duration"/>
+                        <div>
+                            <field name="duration" class="oe_inline"/>
+                            小时
+                        </div>
+                        <field name="priority" widget="priority"/>
                     </group>
-                    <div class="o_horizontal_separator">人员安排</div>
-                    <field name="item_ids">
-                        <tree>
+                    <field name="note" placeholder="备注..."/>
+                    <div class="o_horizontal_separator" invisible="1">人员安排</div>
+                    <field name="item_ids" invisible="1">
+                        <tree editable="bottom">
+                            <field name="display_type" invisible="1"/>
                             <control>
                                 <create name="add_work_item_control" string="添加人员安排"/>
-                                <create name="add_section_control" string="添加章节" context="{'default_display_type': 'line_section'}"/>
+                                <create name="add_section_control" string="添加章节"
+                                        context="{'default_display_type': 'line_section'}"/>
                             </control>
                             <field name="sequence" widget="handle"/>
-                            <field name="display_type" invisible="1"/>
-                            <field name="name" string="名称" optional="show" widget="section_and_note_text"/>
-                            <field name="device_id"/>
-                            <field name="employee_id"/>
+                            <field name="name" string="名称" optional="show" widget="section_and_note_text"
+                                   attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
+                            <field name="device_id" domain="[('device_type', '=', 'power')]"
+                                           attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
+                            <field name="user_id" options="{'no_create':True}" domain="[('id', 'in', parent.users_id)]"/>
                             <field name="work_subject"/>
                             <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                             <field name="actual_quantity"/>
@@ -54,12 +81,16 @@
                             <field name="display_type" invisible="1"/>
                             <sheet>
                                 <group>
-                                    <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
+                                    <field name="name" string="名称" optional="show" widget="section_and_note_text"
+                                           attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
                                     <field name="device_id" domain="[('device_type', '=', 'power')]"
-                                           attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
-                                    <field name="employee_id" options="{'no_create':True}" domain="[('department_id', '=', parent.class_type_id)]"/>
+                                           attrs="{'invisible':[('display_type', '=', 'line_section')]}"
+                                           options="{'no_create':True}"/>
+                                    <field name="user_id" options="{'no_create':True}"
+                                           domain="[('id', 'in', parent.users_id)]"/>
                                     <field name="work_subject"/>
-                                    <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                                    <field name="predetermined_quantity"
+                                           attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                     <field name="actual_quantity"/>
                                     <field name="note" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                 </group>
@@ -76,12 +107,15 @@
         </field>
     </record>
 
-    <record id="toto_work_plan_view_calendar" model="ir.ui.view">
-        <field name="name">toto.work.plan.view.tree</field>
-        <field name="model">toto.work.plan</field>
+    <record id="toto_power_plan_view_calendar" model="ir.ui.view">
+        <field name="name">toto.power.plan.view.tree</field>
+        <field name="model">toto.power.plan</field>
         <field name="arch" type="xml">
-            <calendar string="日历" date_start="date" event_open_popup="true" mode="month"
+            <calendar string="日历" date_start="date" event_open_popup="true" mode="month" color="state"
                       date_stop="date" quick_add="false" form_view_id="ref('toto_power_plan_view_form')">
+                <field name="project"/>
+                <field name="content"/>
+                <field name="user_id"/>
             </calendar>
         </field>
     </record>
