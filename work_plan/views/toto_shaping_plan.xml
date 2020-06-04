@@ -14,6 +14,7 @@
                         <field name="vacation"/>
                         <field name="staffing"/>
                     </group>
+                    <field name="users_id" invisible="1"/>
                     <div class="o_horizontal_separator">人员安排</div>
                     <field name="item_ids">
                         <field name="device_type" invisible="1"/>
@@ -27,7 +28,7 @@
                             <field name="name" string="名称" optional="show" widget="section_and_note_text" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
                             <field name="device_id" domain="[('device_type', '=', 'shaping')]"
                                            attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
-                            <field name="employee_id" options="{'no_create':True}" domain="[('department_id', '=', parent.class_type_id)]"/>
+                            <field name="user_id" options="{'no_create':True}" domain="[('id', 'in', parent.users_id)]"/>
                             <field name="work_subject"/>
                             <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                             <field name="actual_quantity"/>
@@ -40,7 +41,7 @@
                                     <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
                                     <field name="device_id" domain="[('device_type', '=', 'shaping')]"
                                            attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
-                                    <field name="employee_id" options="{'no_create':True}" domain="[('department_id', '=', parent.class_type_id)]"/>
+                                    <field name="user_id" options="{'no_create':True}" domain="[('id', 'in', parent.users_id)]"/>
                                     <field name="work_subject"/>
                                     <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                     <field name="actual_quantity"/>
@@ -51,7 +52,7 @@
                     </field>
                     <group string="不良对策" attrs="{'invisible':[('plan_type', '=', 'power')]}">
                         <field name="bad_content"/>
-                        <field name="employee_ids" options="{'no_create':True}" widget="many2many_tags"/>
+                        <field name="user_id" options="{'no_create':True}"/>
                         <field name="detail_countermeasure"/>
                     </group>
                 </sheet>

@@ -44,7 +44,7 @@ class WorkPlanItem(models.Model):
     sequence = fields.Integer(string="Sequence", default=10)
     device_id = fields.Many2one('toto.work.device', '设备', ondelete="restrict")
     employee_id = fields.Many2one('hr.employee', '作业员', ondelete="restrict")
-    # domain="[('department_id', '=', parent.class_type_id)]"
+    user_id = fields.Many2one("res.users", string='作业员', ondelete="restrict")
     work_subject = fields.Char('作业项目')
     predetermined_quantity = fields.Integer('预定数量', default=None)
     actual_quantity = fields.Integer('实际数量', default=None)
