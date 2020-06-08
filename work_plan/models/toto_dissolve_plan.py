@@ -14,8 +14,7 @@ class WorkPlanDissolve(models.Model):
         else:
             return None
 
-    assume_employee_id = fields.Many2one('hr.employee', '担当', default=_default_assume_employee_id)
-    class_type_id = fields.Many2one('hr.department', related="assume_employee_id.department_id")
+    undertake_user_id = fields.Many2one('res.users', '担当', default=lambda self: self.env.user)
     item_ids = fields.One2many("toto.dissolve.plan.item", "dissolve_plan_id")
     note = fields.Text('备注')
     state = fields.Selection([
@@ -40,18 +39,18 @@ class WorkPlanDissolveItem(models.Model):
     device_id = fields.Many2one('toto.work.device', '设备', ondelete="restrict",
                                 domain="[('device_type','=','dissolve')]")
     product_id = fields.Many2one('toto.work.plan.product', '作业内容(品番)', ondelete="restrict")
-    staff_ids = fields.One2many("hr.employee", "dissolve_item_id", string="作业员")
+    user_ids = fields.One2many("res.users", "dissolve_item_id", string="作业员")
     staffing = fields.Integer('人数配置', compute="_compute_staffing")
     state = fields.Selection([
         ('progress', '进行中'),
         ('done', '完成'),
     ], string='状态', copy=False, default='progress', readonly=True, required=True)
 
-    @api.depends("staff_ids")
+    @api.depends("user_ids")
     def _compute_staffing(self):
         for item in self:
-            if item.staff_ids:
-                item.staffing = len(item.staff_ids)
+            if item.user_ids:
+                item.staffing = len(item.user_ids)
             else:
                 item.staffing = 0
 
@@ -60,7 +59,7 @@ class WorkPlanDissolveItem(models.Model):
         self.state = 'done'
 
 
-class HrEmployeeInherit(models.Model):
-    _inherit = 'hr.employee'
+class ResUserInherit(models.Model):
+    _inherit = 'res.users'
 
     dissolve_item_id = fields.Many2one("toto.dissolve.plan.item")

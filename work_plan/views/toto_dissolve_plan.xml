@@ -8,17 +8,18 @@
                 <header>
                     <field name="state" widget="statusbar"/>
                 </header>
-                <field name="class_type_id" invisible="1"/>
                 <sheet>
+                    <field name="users_id" widget="many2many_tags" invisible="1"/>
                     <group col="4">
+                        <field name="undertake_user_id" options="{'no_create':True}"/>
+                        <field name="class_type_id"/>
                         <field name="date" widget="date"/>
-                        <field name="assume_employee_id" options="{'no_create':True}"/>
                         <field name="work_type"/>
                         <field name="vacation"/>
                         <field name="staffing"/>
-                        <newline/>
-                        <field name="note" colspan="4"/>
                     </group>
+                    <h4>备注：</h4>
+                    <field name="note"/>
                     <div class="o_horizontal_separator">人员安排</div>
                     <field name="item_ids">
                         <tree editable="bottom">
@@ -32,8 +33,8 @@
                             <field name="name" string="名称" optional="show" widget="section_and_note_text"/>
                             <field name="device_id"/>
                             <field name="staffing"/>
-                            <field name="staff_ids" widget="many2many_tags" options="{'no_create':True}"
-                                   domain="[('department_id', '=', parent.class_type_id)]"/>
+                            <field name="user_ids" widget="many2many_tags" options="{'no_create':True}"
+                                   domain="[('id', '=', parent.users_id)]"/>
                             <field name="product_id" options="{'no_create':True}"/>
                             <field name="predetermined_quantity"
                                    attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
@@ -51,8 +52,8 @@
                                     <field name="device_id" domain="[('device_type', '=', 'dissolve')]"
                                            attrs="{'invisible':[('display_type', '=', 'line_section')]}"
                                            options="{'no_create':True}"/>
-                                    <field name="staff_ids" options="{'no_create':True}" widget="many2many_tags"
-                                           domain="[('department_id', '=', parent.class_type_id)]"/>
+                                    <field name="user_ids" options="{'no_create':True}" widget="many2many_tags"
+                                           domain="[('id', '=', parent.users_id)]"/>
                                     <field name="product_id" options="{'no_create':True}"/>
                                     <field name="predetermined_quantity"
                                            attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
@@ -78,7 +79,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="date" widget="date"/>
-                <field name="assume_employee_id"/>
+                <field name="undertake_user_id"/>
                 <field name="note"/>
                 <field name="state"/>
             </tree>
