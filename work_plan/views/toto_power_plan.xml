@@ -53,7 +53,7 @@
                     </group>
                     <field name="note" placeholder="备注..."/>
                     <div class="o_horizontal_separator" invisible="1">人员安排</div>
-                    <field name="item_ids" invisible="1">
+                    <field name="power_item_ids" invisible="1">
                         <tree editable="bottom">
                             <field name="display_type" invisible="1"/>
                             <control>

@@ -20,7 +20,7 @@ class WorkPowerPlan(models.Model):
     finish_time = fields.Datetime("完成时间", readonly=True, track_visibility='onchange')
     duration = fields.Float("持续时间", digits=(3, 1))
     note = fields.Text("备注")
-    item_ids = fields.One2many("toto.power.plan.item", "power_plan_id")
+    power_item_ids = fields.One2many("toto.power.plan.item", "power_plan_id")
     state = fields.Selection([
         ('draft', '新的'),
         ('process', '进行中'),

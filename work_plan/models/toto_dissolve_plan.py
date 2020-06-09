@@ -15,17 +15,17 @@ class WorkPlanDissolve(models.Model):
             return None
 
     undertake_user_id = fields.Many2one('res.users', '担当', default=lambda self: self.env.user)
-    item_ids = fields.One2many("toto.dissolve.plan.item", "dissolve_plan_id")
+    dissolve_item_ids = fields.One2many("toto.dissolve.plan.item", "dissolve_plan_id")
     note = fields.Text('备注')
     state = fields.Selection([
         ('progress', '进行中'),
         ('done', '完成'),
     ], string='状态', compute="_compute_state", store=True)
 
-    @api.depends("item_ids", "item_ids.state")
+    @api.depends("dissolve_item_ids", "dissolve_item_ids.state")
     def _compute_state(self):
         for dissolve in self:
-            if all([item.state == 'done' for item in dissolve.item_ids]):
+            if all([item.state == 'done' for item in dissolve.dissolve_item_ids]):
                 dissolve.state = "done"
             else:
                 dissolve.state = "progress"
