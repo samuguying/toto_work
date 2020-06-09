@@ -21,7 +21,7 @@
                     <h4>备注：</h4>
                     <field name="note"/>
                     <div class="o_horizontal_separator">人员安排</div>
-                    <field name="item_ids">
+                    <field name="dissolve_item_ids">
                         <tree editable="bottom">
                             <control>
                                 <create name="add_work_item_control" string="添加人员安排"/>

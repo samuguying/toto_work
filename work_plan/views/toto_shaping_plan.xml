@@ -16,7 +16,7 @@
                     </group>
                     <field name="users_id" invisible="1"/>
                     <div class="o_horizontal_separator">人员安排</div>
-                    <field name="item_ids">
+                    <field name="shaping_item_ids">
                         <field name="device_type" invisible="1"/>
                         <tree editable="bottom">
                             <control>
