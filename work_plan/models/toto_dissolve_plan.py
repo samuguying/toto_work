@@ -39,20 +39,17 @@ class WorkPlanDissolveItem(models.Model):
     device_id = fields.Many2one('toto.work.device', '设备', ondelete="restrict",
                                 domain="[('device_type','=','dissolve')]")
     product_id = fields.Many2one('toto.work.plan.product', '作业内容(品番)', ondelete="restrict")
-    employee_ids = fields.Many2many('hr.employee', '作业员', ondelete="restrict")
+    employee_ids = fields.Many2many('hr.employee', string='作业员', ondelete="restrict")
     staffing = fields.Integer('人数配置', compute="_compute_staffing")
     state = fields.Selection([
         ('progress', '进行中'),
         ('done', '完成'),
     ], string='状态', copy=False, default='progress', readonly=True, required=True)
 
-    @api.depends("user_ids")
+    @api.depends("employee_ids")
     def _compute_staffing(self):
         for item in self:
-            if item.user_ids:
-                item.staffing = len(item.user_ids)
-            else:
-                item.staffing = 0
+            item.staffing = len(item.user_ids)
 
     def action_finish(self):
         self.ensure_one()

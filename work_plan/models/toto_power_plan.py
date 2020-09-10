@@ -8,8 +8,7 @@ class WorkPowerPlan(models.Model):
     create_user_id = fields.Many2one("res.users", "创建人", default=lambda self: self.env.user, readonly=True)
     project = fields.Char("作业项目", track_visibility='onchange', required=True)
     content = fields.Char("作业内容", track_visibility='onchange', required=True)
-    user_id = fields.Many2one("res.users", string='作业者', ondelete="restrict",
-                              domain="[('id', 'in', users_id)]")
+    user_id = fields.Many2one("res.users", string='作业者', ondelete="restrict")
     priority = fields.Selection([
         ('0', '很低'),
         ('1', '低'),
