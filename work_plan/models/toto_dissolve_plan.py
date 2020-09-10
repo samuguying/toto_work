@@ -39,7 +39,7 @@ class WorkPlanDissolveItem(models.Model):
     device_id = fields.Many2one('toto.work.device', '设备', ondelete="restrict",
                                 domain="[('device_type','=','dissolve')]")
     product_id = fields.Many2one('toto.work.plan.product', '作业内容(品番)', ondelete="restrict")
-    user_ids = fields.One2many("res.users", "dissolve_item_id", string="作业员")
+    employee_ids = fields.Many2many('hr.employee', '作业员', ondelete="restrict")
     staffing = fields.Integer('人数配置', compute="_compute_staffing")
     state = fields.Selection([
         ('progress', '进行中'),

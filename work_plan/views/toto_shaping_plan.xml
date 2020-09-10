@@ -14,7 +14,6 @@
                         <field name="vacation"/>
                         <field name="staffing"/>
                     </group>
-                    <field name="users_id" invisible="1"/>
                     <div class="o_horizontal_separator">人员安排</div>
                     <field name="shaping_item_ids">
                         <field name="device_type" invisible="1"/>
@@ -28,7 +27,7 @@
                             <field name="name" string="名称" optional="show" widget="section_and_note_text" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
                             <field name="device_id" domain="[('device_type', '=', 'shaping')]"
                                            attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
-                            <field name="user_id" options="{'no_create':True}" domain="[('id', 'in', parent.users_id)]"/>
+                            <field name="employee_id" options="{'no_create':True}" domain="[('department_id', 'child_of', parent.department_id)]"/>
                             <field name="work_subject"/>
                             <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                             <field name="actual_quantity"/>

@@ -52,8 +52,7 @@
                                     <field name="device_id" domain="[('device_type', '=', 'dissolve')]"
                                            attrs="{'invisible':[('display_type', '=', 'line_section')]}"
                                            options="{'no_create':True}"/>
-                                    <field name="user_ids" options="{'no_create':True}" widget="many2many_tags"
-                                           domain="[('id', '=', parent.users_id)]"/>
+                                    <field name="employee_ids" options="{'no_create':True}" domain="[('department_id', 'child_of', parent.department_id)]"/>
                                     <field name="product_id" options="{'no_create':True}"/>
                                     <field name="predetermined_quantity"
                                            attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
