@@ -8,7 +8,7 @@
                 <field name="date" widget="date"/>
                 <field name="project"/>
                 <field name="content"/>
-                <field name="user_id"/>
+                <field name="employee_id"/>
                 <field name="note"/>
                 <field name="state"/>
             </tree>
@@ -39,7 +39,7 @@
                         <field name="create_user_id" options="{'no_create':True}"/>
                         <field name="class_type_id" options="{'no_create':True}"/>
                         <field name="content"/>
-                        <field name="user_id" options="{'no_create':True}"/>
+                        <field name="employee_id" options="{'no_create':True}" domain="[('department_id', 'child_of', class_type_id)]"/>
                         <field name="date" widget="date"/>
                         <field name="plan_time"/>
                         <field name="finish_time"/>
@@ -113,7 +113,7 @@
                       date_stop="date" quick_add="false" form_view_id="ref('toto_power_plan_view_form')">
                 <field name="project"/>
                 <field name="content"/>
-                <field name="user_id"/>
+                <field name="employee_id"/>
             </calendar>
         </field>
     </record>

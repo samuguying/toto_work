@@ -25,7 +25,9 @@ class WorkPlanDissolve(models.Model):
     @api.depends("dissolve_item_ids", "dissolve_item_ids.state")
     def _compute_state(self):
         for dissolve in self:
-            if all([item.state == 'done' for item in dissolve.dissolve_item_ids]):
+            if not dissolve.dissolve_item_ids:
+                dissolve.state = False
+            elif all([item.state == 'done' for item in dissolve.dissolve_item_ids]):
                 dissolve.state = "done"
             else:
                 dissolve.state = "progress"
@@ -42,18 +44,19 @@ class WorkPlanDissolveItem(models.Model):
     employee_ids = fields.Many2many('hr.employee', string='作业员', ondelete="restrict")
     staffing = fields.Integer('人数配置', compute="_compute_staffing")
     state = fields.Selection([
-        ('progress', '进行中'),
+        ('not_done', '未完成'),
         ('done', '完成'),
-    ], string='状态', copy=False, default='progress', readonly=True, required=True)
+    ], string='状态', copy=False, default='not_done', readonly=True, required=True)
 
     @api.depends("employee_ids")
     def _compute_staffing(self):
         for item in self:
-            item.staffing = len(item.user_ids)
+            item.staffing = len(item.employee_ids)
 
     def action_finish(self):
         self.ensure_one()
-        self.state = 'done'
+        if self.state == "not_done":
+            self.state = 'done'
 
 
 class ResUserInherit(models.Model):
