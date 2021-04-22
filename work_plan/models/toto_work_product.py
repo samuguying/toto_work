@@ -20,5 +20,5 @@ class Product(models.Model):
     apply_to_products = fields.Char(string="对应制品")
 
     _sql_constraints = [
-        ("code_uniq", "unique (code)", "品番不能重复！"),
+        ("code_uniq", "unique (type, code)", "品番不能重复！"),
     ]
