@@ -5,8 +5,13 @@
         <field name="model">toto.work.plan.product</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
+                <field name="type"/>
                 <field name="code"/>
                 <field name="name"/>
+                <field name="work_subject_id"/>
+                <field name="shaping_product_ids" widget="many2many_tags"
+                       attrs="{'invisible':[('type','!=','dissolve')]}" options="{'no_create':True}"/>
+                <field name="apply_to_products"/>
             </tree>
         </field>
     </record>
@@ -18,16 +23,35 @@
             <form>
                 <sheet>
                     <group col="4">
+                        <field name="type"/>
+                        <newline/>
                         <field name="code"/>
                         <field name="name"/>
+                        <field name="work_subject_id"/>
+                        <field name="apply_to_products"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
+    <record id="toto_work_plan_product_view_search" model="ir.ui.view">
+        <field name="name">toto.work.plan.product.view.search</field>
+        <field name="model">toto.work.plan.product</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="code"/>
+                <field name="name"/>
+                <group>
+                    <filter name="group_by_type" string="系别" context="{'group_by':'type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
     <record id="toto_work_plan_product_action" model="ir.actions.act_window">
-        <field name="name">溶着系</field>
+        <field name="name">品番</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">toto.work.plan.product</field>
         <field name="view_mode">tree,form</field>

@@ -28,7 +28,8 @@
                             <field name="device_id" domain="[('device_type', '=', 'shaping')]"
                                            attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
                             <field name="employee_id" options="{'no_create':True}" domain="[('department_id', 'child_of', parent.class_type_id)]"/>
-                            <field name="work_subject"/>
+                            <field name="product_id" options="{'no_create':True}" domain="[('type', '=', 'shaping')]"/>
+                            <field name="work_subject" optional="hide"/>
                             <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                             <field name="actual_quantity"/>
                             <field name="note" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
@@ -38,9 +39,10 @@
                             <sheet>
                                 <group>
                                     <field name="name" attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
-                                    <field name="device_id" domain="[('device_type', '=', 'shaping')]"
+                                    <field name="device_id"
                                            attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
                                     <field name="employee_id" options="{'no_create':True}" domain="[('department_id', 'child_of', parent.class_type_id)]"/>
+                                    <field name="product_id" options="{'no_create':True}"/>
                                     <field name="work_subject"/>
                                     <field name="predetermined_quantity" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                                     <field name="actual_quantity"/>

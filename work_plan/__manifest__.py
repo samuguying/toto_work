@@ -14,6 +14,7 @@
         "security/ir.model.access.csv",
         "views/toto_work_product.xml",
         "views/toto_work_device.xml",
+        "views/toto_work_subject.xml",
         "views/toto_shaping_plan.xml",
         "views/toto_power_plan.xml",
         "views/toto_dissolve_plan.xml",

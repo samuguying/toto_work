@@ -6,3 +6,4 @@ from . import toto_process_plan
 from . import toto_work_product
 from . import toto_shaping_plan
 from . import toto_work_line
+from . import toto_work_subject

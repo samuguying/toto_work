@@ -34,7 +34,10 @@
                             <field name="staffing"/>
                             <field name="employee_ids" widget="many2many_tags" options="{'no_create':True}"
                                    domain="[('department_id', 'child_of', parent.class_type_id)]"/>
-                            <field name="product_id" options="{'no_create':True}"/>
+                            <field name="work_subject_id" options="{'no_create':True}"/>
+                            <field name="product_id" options="{'no_create':True}" domain="[('type', '=', 'dissolve'), ('work_subject_id','=',work_subject_id)]"/>
+                            <field name="shaping_product_ids" widget="many2many_tags"/>
+                            <field name="apply_to_products"/>
                             <field name="predetermined_quantity"
                                    attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                             <field name="actual_quantity"/>

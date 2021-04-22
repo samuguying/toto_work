@@ -40,7 +40,10 @@ class WorkPlanDissolveItem(models.Model):
     dissolve_plan_id = fields.Many2one("toto.dissolve.plan", "溶着系计划")
     device_id = fields.Many2one('toto.work.device', '设备', ondelete="restrict",
                                 domain="[('device_type','=','dissolve')]")
-    product_id = fields.Many2one('toto.work.plan.product', '作业内容(品番)', ondelete="restrict")
+    work_subject_id = fields.Many2one("toto.work.subject", string='作业内容')
+    product_id = fields.Many2one('toto.work.plan.product', '品番', ondelete="restrict")
+    apply_to_products = fields.Char(related="product_id.apply_to_products")
+    shaping_product_ids = fields.Many2many(related="product_id.shaping_product_ids")
     employee_ids = fields.Many2many('hr.employee', string='作业员', ondelete="restrict")
     staffing = fields.Integer('人数配置', compute="_compute_staffing")
     state = fields.Selection([
