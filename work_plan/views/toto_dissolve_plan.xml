@@ -39,7 +39,7 @@
                             <field name="predetermined_quantity"
                                    attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                             <field name="actual_quantity"/>
-                            <field name="note" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
+                            <field name="note" attrs="{'invisible':[('display_type', '=', 'line_section')]}" optional="hide"/>
                             <field name="state" attrs="{'invisible':[('display_type', '=', 'line_section')]}"/>
                             <button name="action_finish" type="object" icon="fa-check"
                                     attrs="{'invisible':['|',('display_type', '=', 'line_section'),('state', '=', 'done')]}"/>
