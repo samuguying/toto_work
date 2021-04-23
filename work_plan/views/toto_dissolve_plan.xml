@@ -24,12 +24,10 @@
                         <tree editable="bottom">
                             <control>
                                 <create name="add_work_item_control" string="添加人员安排"/>
-                                <create name="add_section_control" string="添加章节"
-                                        context="{'default_display_type': 'line_section'}"/>
                             </control>
                             <field name="sequence" widget="handle"/>
                             <field name="display_type" invisible="1"/>
-                            <field name="name" string="名称" optional="show" widget="section_and_note_text"/>
+                            <field name="name" string="名称"/>
                             <field name="device_id"/>
                             <field name="staffing"/>
                             <field name="employee_ids" widget="many2many_tags" options="{'no_create':True}"

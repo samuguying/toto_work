@@ -57,12 +57,9 @@
                             <field name="display_type" invisible="1"/>
                             <control>
                                 <create name="add_work_item_control" string="添加人员安排"/>
-                                <create name="add_section_control" string="添加章节"
-                                        context="{'default_display_type': 'line_section'}"/>
                             </control>
                             <field name="sequence" widget="handle"/>
-                            <field name="name" string="名称" optional="show" widget="section_and_note_text"
-                                   attrs="{'invisible':[('display_type', '!=', 'line_section')]}"/>
+                            <field name="name" string="名称"/>
                             <field name="device_id" domain="[('device_type', '=', 'power')]"
                                            attrs="{'invisible':[('display_type', '=', 'line_section')]}" options="{'no_create':True}"/>
                             <field name="employee_id" options="{'no_create':True}" domain="[('department_id', 'child_of', parent.class_type_id)]"/>

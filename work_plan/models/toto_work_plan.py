@@ -44,4 +44,4 @@ class WorkPlanItem(models.Model):
     display_type = fields.Selection([
         ('line_section', "Section"),
         ('line_note', "Note")], default=False, help="Technical field for UX purpose.")
-    name = fields.Char(string="名称")
+    name = fields.Char(string="名称", related="product_id.name")
