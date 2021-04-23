@@ -45,7 +45,7 @@ class WorkPlanDissolveItem(models.Model):
     apply_to_products = fields.Char(related="product_id.apply_to_products")
     shaping_product_ids = fields.Many2many(related="product_id.shaping_product_ids")
     employee_ids = fields.Many2many('hr.employee', string='作业员', ondelete="restrict")
-    staffing = fields.Integer('人数配置', compute="_compute_staffing")
+    staffing = fields.Integer('人数', compute="_compute_staffing")
     state = fields.Selection([
         ('not_done', '未完成'),
         ('done', '完成'),
