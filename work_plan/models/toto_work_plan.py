@@ -38,8 +38,8 @@ class WorkPlanItem(models.Model):
     employee_id = fields.Many2one('hr.employee', '作业员', ondelete="restrict")
     work_subject = fields.Char('作业项目')
     product_id = fields.Many2one("toto.work.plan.product", string='作业项目')
-    predetermined_quantity = fields.Integer('预定数量', default=None)
-    actual_quantity = fields.Integer('实际数量', default=None)
+    predetermined_quantity = fields.Integer('预定数', default=None)
+    actual_quantity = fields.Integer('实际数', default=None)
     note = fields.Text('备注')
     display_type = fields.Selection([
         ('line_section', "Section"),
